@@ -10,24 +10,23 @@ fn main() {
   println!("How many files do you want to open?");
 
   let mut input: String = String::new();
-  // code will not compile until you declare ‘input’ here
   match io::stdin().read_line(&mut input) {
-    Ok(_n) => {}
+    Ok(_n) => {input.pop();}
     Err(error) => println!("Error while reading your input: {}", error),
   }
-
-  input.pop();  
+    
 
   number_of_files = input.parse().unwrap_or(1);
-  let n = number_of_files;
-  println!("updated number_of_files={}", number_of_files);
+  println!("number_of_files={}", number_of_files);
 
-  while number_of_files != 0 {
-    println!("Please enter the name/path to a file: ");
+  for i in 1..(number_of_files+1) {
+    let fomattedNumb: String = i.to_string();
+    match fomattedNumb {
+
+    }
+    println!("[{}/{}]Please enter the name/path to a file number {}: ", i, number_of_files, i);
     // need to ask for input here
- 
-    number_of_files -= 1; // or: number_of_files = number_of_files - 1;
-  }
+   }
 
   println!("Bye {}", KITTEN);
 }
