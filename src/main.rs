@@ -18,13 +18,16 @@ fn main() {
 
   number_of_files = input.parse().unwrap_or(1);
   println!("number_of_files={}", number_of_files);
-
+  
   for i in 1..(number_of_files+1) {
-    let fomattedNumb: String = i.to_string();
-    match fomattedNumb {
-
-    }
-    println!("[{}/{}]Please enter the name/path to a file number {}: ", i, number_of_files, i);
+    let ordinal = i.to_string()
+    + match i % 10 {
+      1 if i % 100 != 11 => "st",
+      2 if i % 100 != 12 => "nd",
+      3 if i % 100 != 13 => "rd",
+      _ => "th",
+    };
+    println!("[{}/{}]Please enter the name/path to the {} file: ", i, number_of_files, ordinal);
     // need to ask for input here
    }
 
