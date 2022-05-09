@@ -1,5 +1,6 @@
-use kitten::string_helpers::{to_ordinal, first_word};
-use std::io; 
+use kitten::string_helpers::{first_word, to_ordinal};
+use kitten::file_helpers::{file_content};
+use std::io;
 
 fn main() {
   const KITTEN: &str = "🐱";
@@ -15,21 +16,33 @@ fn main() {
     Ok(_n) => {
       input = first_word(input);
       number_of_files = input.parse().unwrap_or(1);
-    
     }
     Err(error) => println!("Error while reading your input: {}", error),
   }
-    
 
   println!("number_of_files={}", number_of_files);
-  
-  for i in 1..(number_of_files+1) {
-    
-    let ordinal = to_ordinal(i);
 
-    println!("[{}/{}]Please enter the name/path to the {} file: ", i, number_of_files, ordinal);
-    // need to ask for input here
-   }
+  let mut output = String::new();
+
+  for i in 1..(number_of_files + 1) {
+    let ordinal = to_ordinal(i);
+    input = String::from("");
+
+    println!(
+      "[{}/{}]Please enter the name/path to the {} file: ",
+      i, number_of_files, ordinal
+    );
+    match io::stdin().read_line(&mut input) {
+      Ok(_) => {
+        input = first_word(input);
+        println!("Opening file: {}", input); // for debugging
+      }
+      Err(error) => {
+        panic!("Error while reading your input: {}", error);
+      }
+    }
+    output = output + &file_content(&input).unwrap();
+  }
 
   println!("Bye {}", KITTEN);
 }
