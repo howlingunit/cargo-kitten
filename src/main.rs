@@ -43,6 +43,7 @@ fn main() {
     }
     output = output + &file_content(&input).unwrap();
   }
+  println!("{}", output);
 
   println!("Bye {}", KITTEN);
 }

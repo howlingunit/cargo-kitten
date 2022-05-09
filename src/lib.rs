@@ -87,7 +87,7 @@ pub mod file_helpers {
 
   pub fn file_content(filename: &str) -> Result<String, String> {
     match fs::read_to_string(filename) {
-      Ok(Content) => Ok(Content),
+      Ok(content) => Ok(content),
       Err(error) if format!("{}", error).contains("No such file") => {
         Err(format!("{} does not exist", filename))
       }
