@@ -1,10 +1,16 @@
 use kitten::string_helpers::{first_word, to_ordinal};
 use kitten::file_helpers::{file_content};
-use std::io;
+use std::{io, env};
 
 fn main() {
   const KITTEN: &str = "🐱";
   println!("Hi {}", KITTEN);
+
+  let mut filenames: Vec<String>;
+
+  for i in env::args(){
+    filenames.push(i);
+  }
 
   let mut number_of_files: u32 = 1;
   println!("default number_of_files={}", number_of_files);
